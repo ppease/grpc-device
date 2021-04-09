@@ -120,6 +120,7 @@ NiDCPowerLibrary::NiDCPowerLibrary() : shared_library_(kLibraryName)
   function_pointers_.ExportSignal = reinterpret_cast<ExportSignalPtr>(shared_library_.get_function_pointer("niDCPower_ExportSignal"));
   function_pointers_.FetchMultiple = reinterpret_cast<FetchMultiplePtr>(shared_library_.get_function_pointer("niDCPower_FetchMultiple"));
   function_pointers_.GetAttributeViBoolean = reinterpret_cast<GetAttributeViBooleanPtr>(shared_library_.get_function_pointer("niDCPower_GetAttributeViBoolean"));
+  function_pointers_.FetchMultipleLcr = reinterpret_cast<FetchMultipleLcrPtr>(shared_library_.get_function_pointer("niDCPower_FetchMultipleLcr"));
   function_pointers_.GetAttributeViInt32 = reinterpret_cast<GetAttributeViInt32Ptr>(shared_library_.get_function_pointer("niDCPower_GetAttributeViInt32"));
   function_pointers_.GetAttributeViInt64 = reinterpret_cast<GetAttributeViInt64Ptr>(shared_library_.get_function_pointer("niDCPower_GetAttributeViInt64"));
   function_pointers_.GetAttributeViReal64 = reinterpret_cast<GetAttributeViReal64Ptr>(shared_library_.get_function_pointer("niDCPower_GetAttributeViReal64"));
@@ -1365,6 +1366,18 @@ ViStatus NiDCPowerLibrary::GetAttributeViBoolean(ViSession vi, ViConstString cha
   return niDCPower_GetAttributeViBoolean(vi, channelName, attributeId, attributeValue);
 #else
   return function_pointers_.GetAttributeViBoolean(vi, channelName, attributeId, attributeValue);
+#endif
+}
+
+ViStatus NiDCPowerLibrary::FetchMultipleLcr(ViSession vi, ViConstString channelName, ViReal64 timeout, ViInt32 count, NILCRMeasurement_struct* measurements)
+{
+  if (!function_pointers_.FetchMultipleLcr) {
+    throw nidevice_grpc::LibraryLoadException("Could not find niDCPower_FetchMultipleLcr.");
+  }
+#if defined(_MSC_VER)
+  return niDCPower_FetchMultipleLcr(vi, channelName, timeout, count, measurements);
+#else
+  return function_pointers_.FetchMultipleLcr(vi, channelName, timeout, count, measurements);
 #endif
 }
 

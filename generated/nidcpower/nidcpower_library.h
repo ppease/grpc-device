@@ -117,6 +117,7 @@ class NiDCPowerLibrary : public nidcpower_grpc::NiDCPowerLibraryInterface {
   ViStatus ExportSignal(ViSession vi, ViInt32 signal, ViConstString signalIdentifier, ViConstString outputTerminal);
   ViStatus FetchMultiple(ViSession vi, ViConstString channelName, ViReal64 timeout, ViInt32 count, ViReal64 voltageMeasurements[], ViReal64 currentMeasurements[], ViBoolean inCompliance[], ViInt32* actualCount);
   ViStatus GetAttributeViBoolean(ViSession vi, ViConstString channelName, ViAttr attributeId, ViBoolean* attributeValue);
+  ViStatus FetchMultipleLcr(ViSession vi, ViConstString channelName, ViReal64 timeout, ViInt32 count, NILCRMeasurement_struct* measurements);
   ViStatus GetAttributeViInt32(ViSession vi, ViConstString channelName, ViAttr attributeId, ViInt32* attributeValue);
   ViStatus GetAttributeViInt64(ViSession vi, ViConstString channelName, ViAttr attributeId, ViInt64* attributeValue);
   ViStatus GetAttributeViReal64(ViSession vi, ViConstString channelName, ViAttr attributeId, ViReal64* attributeValue);
@@ -265,6 +266,7 @@ class NiDCPowerLibrary : public nidcpower_grpc::NiDCPowerLibraryInterface {
   using ExportSignalPtr = ViStatus (*)(ViSession vi, ViInt32 signal, ViConstString signalIdentifier, ViConstString outputTerminal);
   using FetchMultiplePtr = ViStatus (*)(ViSession vi, ViConstString channelName, ViReal64 timeout, ViInt32 count, ViReal64 voltageMeasurements[], ViReal64 currentMeasurements[], ViBoolean inCompliance[], ViInt32* actualCount);
   using GetAttributeViBooleanPtr = ViStatus (*)(ViSession vi, ViConstString channelName, ViAttr attributeId, ViBoolean* attributeValue);
+  using FetchMultipleLcrPtr = ViStatus (*)(ViSession vi, ViConstString channelName, ViReal64 timeout, ViInt32 count, NILCRMeasurement_struct* measurements);
   using GetAttributeViInt32Ptr = ViStatus (*)(ViSession vi, ViConstString channelName, ViAttr attributeId, ViInt32* attributeValue);
   using GetAttributeViInt64Ptr = ViStatus (*)(ViSession vi, ViConstString channelName, ViAttr attributeId, ViInt64* attributeValue);
   using GetAttributeViReal64Ptr = ViStatus (*)(ViSession vi, ViConstString channelName, ViAttr attributeId, ViReal64* attributeValue);
@@ -413,6 +415,7 @@ class NiDCPowerLibrary : public nidcpower_grpc::NiDCPowerLibraryInterface {
     ExportSignalPtr ExportSignal;
     FetchMultiplePtr FetchMultiple;
     GetAttributeViBooleanPtr GetAttributeViBoolean;
+    FetchMultipleLcrPtr FetchMultipleLcr;
     GetAttributeViInt32Ptr GetAttributeViInt32;
     GetAttributeViInt64Ptr GetAttributeViInt64;
     GetAttributeViReal64Ptr GetAttributeViReal64;

@@ -123,6 +123,7 @@ public:
   ::grpc::Status ExportSignal(::grpc::ServerContext* context, const ExportSignalRequest* request, ExportSignalResponse* response) override;
   ::grpc::Status FetchMultiple(::grpc::ServerContext* context, const FetchMultipleRequest* request, FetchMultipleResponse* response) override;
   ::grpc::Status GetAttributeViBoolean(::grpc::ServerContext* context, const GetAttributeViBooleanRequest* request, GetAttributeViBooleanResponse* response) override;
+  ::grpc::Status FetchMultipleLcr(::grpc::ServerContext* context, const FetchMultipleLcrRequest* request, FetchMultipleLcrResponse* response) override;
   ::grpc::Status GetAttributeViInt32(::grpc::ServerContext* context, const GetAttributeViInt32Request* request, GetAttributeViInt32Response* response) override;
   ::grpc::Status GetAttributeViInt64(::grpc::ServerContext* context, const GetAttributeViInt64Request* request, GetAttributeViInt64Response* response) override;
   ::grpc::Status GetAttributeViReal64(::grpc::ServerContext* context, const GetAttributeViReal64Request* request, GetAttributeViReal64Response* response) override;
@@ -173,6 +174,12 @@ public:
 private:
   NiDCPowerLibraryInterface* library_;
   nidevice_grpc::SessionRepository* session_repository_;
+  void Copy(const NIComplexNumber_struct& input, nidcpower_grpc::NIComplexNumber* output);
+  void Copy(const std::vector<NIComplexNumber_struct>& input, google::protobuf::RepeatedPtrField<nidcpower_grpc::NIComplexNumber>* output);
+  void Copy(const NILCRMeasurement_struct& input, nidcpower_grpc::NILCRMeasurement* output);
+  void Copy(const std::vector<NILCRMeasurement_struct>& input, google::protobuf::RepeatedPtrField<nidcpower_grpc::NILCRMeasurement>* output);
+  void Copy(const NILoadCompensationSpot_struct& input, nidcpower_grpc::NILoadCompensationSpot* output);
+  void Copy(const std::vector<NILoadCompensationSpot_struct>& input, google::protobuf::RepeatedPtrField<nidcpower_grpc::NILoadCompensationSpot>* output);
 };
 
 } // namespace nidcpower_grpc

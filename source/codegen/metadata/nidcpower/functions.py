@@ -1931,6 +1931,42 @@ functions = {
     ],
     'returns': 'ViStatus'
   },
+  'FetchMultipleLcr': {
+    'codegen_method': 'CustomCode',
+    'parameters': [
+      {
+        'name': 'vi',
+        'direction': 'in',
+        'type': 'ViSession'
+      },
+      {
+        'name': 'channelName',
+        'direction': 'in',
+        'type': 'ViConstString'
+      },
+      {
+        'name': 'timeout',
+        'direction': 'in',
+        'type': 'ViReal64'
+      },
+      {
+        'name': 'count',
+        'direction': 'in',
+        'type': 'ViInt32'
+      },
+      {
+        'name': 'measurements',
+        'direction': 'out',
+        'type': 'struct NILCRMeasurement_struct',
+        'size': {
+          'mechanism': 'custom-code',
+          'value': 'count'
+        },
+        'grpc_type': 'repeated NILCRMeasurement'
+       }
+    ],
+    'returns': 'ViStatus'
+  },
   'GetAttributeViInt32': {
     'parameters': [
       {
