@@ -471,6 +471,8 @@ extern "C" {
 /*- Deprecated value definitions ---------------------------*/
 #define NISYNC_VAL_GPS_UNUSEABLE_SATELLITE (8)
 
+typedef struct NICviTime_struct { ViUInt64 lsb; ViInt64 msb; } NICviTime_struct;
+
 /****************************************************************************
  *---------------- Instrument Driver Function Declarations -----------------*
  ****************************************************************************/
@@ -586,6 +588,8 @@ ViStatus _VI_FUNC niSync_GetTime(ViSession vi,
                                  ViUInt32* timeNanoseconds,
                                  ViUInt16* timeFractionalNanoseconds);
 
+ViStatus _VI_FUNC niSync_GetTimeEx(ViSession vi,
+                                   NICviTime_struct* time);
 ViStatus _VI_FUNC niSync_ResetFrequency(ViSession vi);
 
 /*- 1588 Future Time Events Functions ---------------------------------*/

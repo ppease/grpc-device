@@ -13,7 +13,24 @@ config = {
         "initiate_function": "InitiateAcquisition",
         "task": "acquisition",
     },
-    "custom_types": [],
+    'custom_types': [
+        {
+            'name': 'NICviTime_struct',
+            'grpc_name': 'NICviTime',
+            'fields': [
+                {
+                    'type': 'ViUInt64',
+                    'name': 'lsb',
+                    'grpc_name': 'lsb'
+                },
+                {
+                    'type': 'ViInt64',
+                    'name': 'msb',
+                    'grpc_name': 'msb'
+                },
+            ]
+        },
+    ],
     "driver_name": "NI-SYNC",
     "init_function": "init",
     "library_info": {

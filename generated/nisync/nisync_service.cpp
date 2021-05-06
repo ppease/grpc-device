@@ -23,6 +23,21 @@ namespace nisync_grpc {
   {
   }
 
+  void NiSyncService::Copy(const NICviTime_struct& input, nisync_grpc::NICviTime* output) 
+  {
+    output->set_lsb(input.lsb);
+    output->set_msb(input.msb);
+  }
+
+  void NiSyncService::Copy(const std::vector<NICviTime_struct>& input, google::protobuf::RepeatedPtrField<nisync_grpc::NICviTime>* output) 
+  {
+    for (auto item : input) {
+      auto message = new nisync_grpc::NICviTime();
+      Copy(item, message);
+      output->AddAllocated(message);
+    }
+  }
+
   //---------------------------------------------------------------------
   //---------------------------------------------------------------------
   ::grpc::Status NiSyncService::Init(::grpc::ServerContext* context, const InitRequest* request, InitResponse* response)

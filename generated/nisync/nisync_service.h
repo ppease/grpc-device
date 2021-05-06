@@ -35,6 +35,7 @@ public:
   ::grpc::Status ConnectTrigTerminals(::grpc::ServerContext* context, const ConnectTrigTerminalsRequest* request, ConnectTrigTerminalsResponse* response) override;
   ::grpc::Status DisconnectTrigTerminals(::grpc::ServerContext* context, const DisconnectTrigTerminalsRequest* request, DisconnectTrigTerminalsResponse* response) override;
   ::grpc::Status MeasureFrequencyEx(::grpc::ServerContext* context, const MeasureFrequencyExRequest* request, MeasureFrequencyExResponse* response) override;
+  ::grpc::Status GetTimeEx(::grpc::ServerContext* context, const GetTimeExRequest* request, GetTimeExResponse* response) override;
   ::grpc::Status GetAttributeViInt32(::grpc::ServerContext* context, const GetAttributeViInt32Request* request, GetAttributeViInt32Response* response) override;
   ::grpc::Status SetAttributeViInt32(::grpc::ServerContext* context, const SetAttributeViInt32Request* request, SetAttributeViInt32Response* response) override;
   ::grpc::Status GetAttributeViString(::grpc::ServerContext* context, const GetAttributeViStringRequest* request, GetAttributeViStringResponse* response) override;
@@ -46,6 +47,8 @@ public:
 private:
   NiSyncLibraryInterface* library_;
   nidevice_grpc::SessionRepository* session_repository_;
+  void Copy(const NICviTime_struct& input, nisync_grpc::NICviTime* output);
+  void Copy(const std::vector<NICviTime_struct>& input, google::protobuf::RepeatedPtrField<nisync_grpc::NICviTime>* output);
 };
 
 } // namespace nisync_grpc

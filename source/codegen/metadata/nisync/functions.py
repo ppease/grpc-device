@@ -254,7 +254,24 @@ functions = {
             }
         ],
         "returns": "ViStatus"
-    },    
+    },
+    "GetTimeEx": {
+        'codegen_method': 'CustomCode',
+        "parameters": [
+            {
+                "direction": "in",
+                "name": "vi",
+                "type": "ViSession"
+            },
+            {
+                "direction": "out",
+                "name": "timeOut",
+                'type': 'struct NICviTime_struct',
+                'grpc_type': 'NICviTime'
+            }
+        ],
+        "returns": "ViStatus"
+    },
     "GetAttributeViInt32": {
         "parameters": [
             {
